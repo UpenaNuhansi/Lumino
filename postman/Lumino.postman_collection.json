@@ -1,0 +1,44 @@
+{
+  "info": {
+    "_postman_id": "b2c8b7c2-0000-4000-9000-000000000002",
+    "name": "Lumino Gemini API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "List Models",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/models",
+          "host": ["{{base_url}}"],
+          "path": ["models"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Sinhala Summary",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"prompt\": \"Summarize the YouTube video titled 'How to use Google Gemini API' in Sinhala.\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/summarize",
+          "host": ["{{base_url}}"],
+          "path": ["summarize"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
