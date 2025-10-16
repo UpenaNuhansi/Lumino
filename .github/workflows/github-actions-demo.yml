@@ -1,7 +1,4 @@
 name: Lumino API Tests CI
-
-# Trigger the workflow on pushes to the main branch
-# and manually via the GitHub Actions UI
 on:
   push:
     branches: [ main ]
@@ -13,44 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js for Newman
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      # Step 3: Install Newman and HTML Reporter
+          
       - name: Install Newman and Reporter
         run: |
           npm install -g newman
           npm install -g newman-reporter-html
           
-      # --- CRITICAL MISSING STEP FOR LOCALHOST TESTING ---
-      # In a real CI environment, you must start your backend server here 
-      # so that localhost:3000 is available for the tests.
-      # Since your Lumino server code is Node.js, this is what that step would look like:
       
       - name: Start Lumino Backend Proxy Server (Mocked for CI)
-        # Note: This is an example. To truly test, the service must run in the background.
-        # This is often done using 'npm start &' or services/containers.
-        # For simplicity in this demo, we assume the environment is properly configured 
-        # to handle the localhost dependency.
         run: echo "Assuming Lumino server is started/mocked for CI"
 
-      # Step 4: Run the Newman Tests
       - name: Run Lumino API Collection via Newman
-        # NOTE: Paths are updated to reflect your 'postman/' folder structure
         run: |
           newman run postman/Lumino.postman_collection.json \
             -e postman/Lumino.postman_environment.json \
             -r cli,html \
             --reporter-html-export "newman_report.html"
 
-      # Step 5: Upload the HTML report to GitHub Artifacts
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
