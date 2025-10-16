@@ -23,17 +23,22 @@ jobs:
         with:
           node-version: '20'
 
-      # Step 3: Install Newman and HTML Reporter
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start API server
+        run: npm start &
+
+      - name: Wait for API to be ready
+        run: npx wait-on http://localhost:3000/summarize
+
+      - name: Run tests
+        run: npm test
+
       - name: Install Newman and Reporter
         run: |
-          npm install -g newman
-          npm install -g newman-reporter-html
-          
-      # --- CRITICAL MISSING STEP FOR LOCALHOST TESTING ---
-      # In a real CI environment, you must start your backend server here 
-      # so that localhost:3000 is available for the tests.
-      # Since your Lumino server code is Node.js, this is what that step would look like:
-      
+          npm install -g newman newman-reporter-html
+
       - name: Start Lumino Backend Proxy Server (Mocked for CI)
         # Note: This is an example. To truly test, the service must run in the background.
         # This is often done using 'npm start &' or services/containers.
