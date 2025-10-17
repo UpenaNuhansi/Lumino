@@ -9,45 +9,41 @@ jobs:
     name: Run Lumino API Tests
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+  - name: Setup Node.js
+    uses: actions/setup-node@v4
+    with:
+      node-version: '20'
 
-      - name: Install dependencies
-        run: npm ci
+  - name: Install core dependencies
+    run: |
+      npm ci
+      npm install wait-on newman newman-reporter-html
 
-      - name: Start API server
-        run: npm start &
+  - name: Start API server
+    run: npm start &
 
-      - name: Wait for API to be ready
-        run: npx wait-on http://localhost:3000/summarize
+  - name: Wait for API to be ready
+    run: npx wait-on http://localhost:3000/summarize
 
-      - name: Run tests
-        run: npm test
+  - name: Run tests (If you have separate unit/integration tests)
+    run: npm test
 
-      - name: Install Newman and Reporter
-        run: |
-          npm install -g wait-on
-          npm install -g newman newman-reporter-html
-          
+  - name: Start Lumino Backend Proxy Server (Mocked for CI)
+    run: echo "Assuming Lumino server is started/mocked for CI"
 
-      - name: Start Lumino Backend Proxy Server (Mocked for CI)
-        run: echo "Assuming Lumino server is started/mocked for CI"
+  - name: Run Lumino API Collection via Newman
+    run: |
+      npx newman run postman/Lumino.postman_collection.json \
+        -e postman/Lumino.postman_environment.json \
+        -r cli,html \
+        --reporter-html-export "newman_report.html"
 
-      - name: Run Lumino API Collection via Newman
-        run: |
-          newman run postman/Lumino.postman_collection.json \
-            -e postman/Lumino.postman_environment.json \
-            -r cli,html \
-            --reporter-html-export "newman_report.html"
-
-      - name: Upload Test Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: newman-test-report
-          path: newman_report.html
+  - name: Upload Test Report
+    uses: actions/upload-artifact@v4
+    with:
+      name: newman-test-report
+      path: newman_report.html
