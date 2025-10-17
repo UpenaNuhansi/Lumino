@@ -28,7 +28,7 @@ jobs:
         run: node gemini-proxy.js &
 
       - name: Wait for API to be ready
-        run: npx wait-on http://localhost:3000/summarize
+        run: npx wait-on tcp:3000
 
       - name: Run tests (If you have separate unit/integration tests)
         run: npm test
