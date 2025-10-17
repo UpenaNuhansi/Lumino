@@ -19,11 +19,14 @@ steps:
       node-version: '20'
 
   - name: Install core dependencies
+    # Installing all necessary tools (wait-on, newman, reporter) here 
+    # so they are ready for use in subsequent steps.
     run: |
       npm ci
       npm install wait-on newman newman-reporter-html
 
   - name: Start API server
+    # The '&' runs the server in the background
     run: npm start &
 
   - name: Wait for API to be ready
