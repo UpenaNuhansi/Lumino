@@ -30,7 +30,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Wait for API to be ready
-        run: npx wait-on "http://localhost:3000/summarize"
+        run: npx wait-on "http://localhost:3000/summarize" --timeout 15000
 
       - name: Start Lumino Backend Proxy Server (Mocked for CI)
         run: echo "Assuming Lumino server is started/mocked for CI"
@@ -41,6 +41,8 @@ jobs:
             -e postman/Lumino.postman_environment.json \
             -r cli,html \
             --reporter-html-export "newman_report.html"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}    
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
