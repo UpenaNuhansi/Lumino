@@ -21,6 +21,10 @@ app.get('/models', async (req, res) => {
   }
 });
 
+app.get('/summarize', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Server ready' });
+});
+
 // Use the correct model name (update after checking /models)
 app.post('/summarize', async (req, res) => {
   const { prompt } = req.body;
