@@ -25,7 +25,7 @@ jobs:
 
       - name: Start API server
         # The '&' runs the server in the background
-        run: npm start &
+        run: node gemini-proxy.js &
 
       - name: Wait for API to be ready
         run: npx wait-on http://localhost:3000/summarize
