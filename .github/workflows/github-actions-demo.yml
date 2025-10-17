@@ -26,6 +26,8 @@ jobs:
       - name: Start API server
         # The '&' runs the server in the background
         run: node gemini-proxy.js &
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Wait for API to be ready
         run: npx wait-on "http://localhost:3000/summarize"
