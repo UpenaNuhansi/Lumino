@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      HOST: "0.0.0.0"
+      HOST: "127.0.0.1"
       PORT: 3000
 
 
@@ -33,7 +33,7 @@ jobs:
         run: node gemini-proxy.js &
         
       - name: Wait for API to be ready
-        run: npx wait-on "http://localhost:3000/summarize" --timeout 15000
+        run: npx wait-on "http://127.0.0.1:3000/summarize" --timeout 15000
 
       - name: Start Lumino Backend Proxy Server (Mocked for CI)
         run: echo "Assuming Lumino server is started/mocked for CI"
