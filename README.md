@@ -10,12 +10,16 @@
 
 This project is not just a tool; it's a demonstration of how powerful generative AI can be when integrated into everyday browsing, making information more accessible and convenient for the Sinhala-speaking community.
 
+---
+
 ## 💡 Features
 
 * **One-Click Summarization:** Get a concise summary of any YouTube video with a single click from the extension's popup.
 * **Sinhala Language Support:** Specifically designed to provide summaries in the Sinhala language, making it highly relevant for local audiences.
 * **Powered by Google Gemini:** Leverages the state-of-the-art Google Gemini API for accurate and high-quality summarization.
 * **Lightweight & Fast:** Built as a simple and efficient Chrome extension that won't slow down your browser.
+
+---
 
 ## 🚀 Getting Started
 
@@ -52,9 +56,31 @@ This project is not just a tool; it's a demonstration of how powerful generative
 
 Lumino functions by sending a request from your Chrome extension to a local backend server. This server then makes a secure call to the Google Gemini API, sending the video's transcript as a prompt. The API processes the request and returns a summary, which the server then sends back to the extension to be displayed to you.
 
+---
+## 🧪 Testing & Quality
+
+To ensure the reliability and availability of the core summarization service, we use automated API testing integrated into our Continuous Integration (CI) pipeline.
+
+* **Tooling:** API requests are authored in **Postman** and executed in our GitHub Actions workflow using **Newman**.
+* **Report:** The latest test run resulted in **0 failures** across all requests. A detailed, dashboard-style HTML report (using the `htmlextra` reporter) is generated as a build artifact.
+
+### 📊 API Test Results Summary
+
+The following table outlines the requests made against the local proxy server (`http://127.0.0.1:3000`), demonstrating successful API connectivity and functionality:
+
+| Request Name | Method | Endpoint | HTTP Status | Response Time (Avg.) | Key Function |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Generate Sinhala Summary** | `POST` | `/summarize` | `200 OK` | `16s` | **Core Functionality:** Validates that the server successfully calls the Gemini API and returns a summary. |
+| **List Models** | `GET` | `/models` | `200 OK` | `151ms` | **API Health Check:** Validates connectivity to the proxy server and the model listing logic. |
+| **Total Requests** | | | | | **2** |
+
+---
+
 ## 🤝 Contribution
 
 We welcome contributions! Whether it's a new feature idea, a bug fix, or a translation improvement, your help is valuable. Feel free to open an issue or submit a pull request.
+
+---
 
 ## 📄 License
 
