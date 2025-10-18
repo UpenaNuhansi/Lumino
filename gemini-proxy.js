@@ -6,6 +6,7 @@ app.use(cors());
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+console.log("Gemini Proxy Loaded. API Key Present?", !!GEMINI_API_KEY);
 
 // Route to list available models
 app.get('/models', async (req, res) => {
