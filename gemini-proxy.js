@@ -8,15 +8,17 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
 console.log("Gemini Proxy Loaded. API Key Present?", !!GEMINI_API_KEY);
 
 if (!GEMINI_API_KEY) {
-  console.error("❌ Missing GEMINI_API_KEY in environment!");
+  console.error("Missing GEMINI_API_KEY in environment!");
   process.exit(1);
 }
 
+// Start server once — no duplicates!
 app.listen(PORT, HOST, () => {
-  console.log(`✅ Gemini proxy running on http://${HOST}:${PORT}`);
+  console.log(`Gemini proxy running on http://${HOST}:${PORT}`);
 });
 
 // Route to list available models
@@ -37,7 +39,7 @@ app.get('/summarize', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'Server ready' });
 });
 
-// Use the correct model name (update after checking /models)
+// POST route for generating summaries
 app.post('/summarize', async (req, res) => {
   const { prompt } = req.body;
   try {
@@ -67,6 +69,3 @@ app.post('/summarize', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-//const PORT = 3000;
-app.listen(PORT, () => console.log(`Gemini proxy running on port ${PORT}`));
