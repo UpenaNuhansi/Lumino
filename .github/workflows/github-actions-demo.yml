@@ -26,7 +26,7 @@ jobs:
       - name: Install core dependencies
         run: |
           npm ci
-          npm install wait-on newman newman-reporter-html
+          npm install wait-on newman newman-reporter-htmlextra
 
       - name: Start API server
         # The '&' runs the server in the background
@@ -42,8 +42,8 @@ jobs:
         run: |
           npx newman run postman/Lumino.postman_collection.json \
             -e postman/Lumino.postman_environment.json \
-            -r cli,html \
-            --reporter-html-export "newman_report.html" \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export "newman_report.html" \
             --env-var GEMINI_API_KEY=$GEMINI_API_KEY    
 
       - name: Upload Test Report
