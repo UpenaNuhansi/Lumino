@@ -43,9 +43,8 @@ jobs:
           npx newman run postman/Lumino.postman_collection.json \
             -e postman/Lumino.postman_environment.json \
             -r cli,html \
-            --reporter-html-export "newman_report.html"
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}    
+            --reporter-html-export "newman_report.html" \
+            --env-var GEMINI_API_KEY=$GEMINI_API_KEY    
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
