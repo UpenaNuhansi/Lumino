@@ -76,6 +76,12 @@ The following table outlines the requests made against the local proxy server (`
 
 ---
 
+📋 Detailed Test Cases  
+You can view all manual and functional test cases for Lumino here:  
+[View Test Cases on Google Sheets](https://docs.google.com/spreadsheets/d/1o229bQGDtYhuVivhp_FrQhh5cZcJmYQ_1zbZaaNkFUY/edit?usp=sharing)
+
+---
+
 ## 🤝 Contribution
 
 We welcome contributions! Whether it's a new feature idea, a bug fix, or a translation improvement, your help is valuable. Feel free to open an issue or submit a pull request.
@@ -85,6 +91,3 @@ We welcome contributions! Whether it's a new feature idea, a bug fix, or a trans
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
