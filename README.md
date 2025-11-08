@@ -76,9 +76,8 @@ The following table outlines the requests made against the local proxy server (`
 
 ---
 
-📋 Detailed Test Cases  
-You can view all manual and functional test cases for Lumino here:  
-[View Test Cases on Google Sheets](https://docs.google.com/spreadsheets/d/1o229bQGDtYhuVivhp_FrQhh5cZcJmYQ_1zbZaaNkFUY/edit?usp=sharing)
+## 📋 Detailed Test Cases  
+- You can view all manual and functional test cases for Lumino here: [View Test Cases on Google Sheets](https://docs.google.com/spreadsheets/d/1o229bQGDtYhuVivhp_FrQhh5cZcJmYQ_1zbZaaNkFUY/edit?usp=sharing)
 
 ---
 
